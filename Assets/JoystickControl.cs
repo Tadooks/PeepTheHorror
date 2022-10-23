@@ -7,12 +7,20 @@ public class JoystickControl : MonoBehaviour
 {
     public Transform topOfJoystick;
 
+    public TankController tankScr;
+    public ControlType ctrlType;
+
     [SerializeField]
     private float forwardBackwardTilt = 0;
 
     [SerializeField]
     private float sideToSideTilt = 0;
 
+    public enum ControlType
+    {
+        Gears,
+        Throttle
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -29,12 +37,39 @@ public class JoystickControl : MonoBehaviour
             forwardBackwardTilt = Math.Abs(forwardBackwardTilt - 360);
             Debug.Log("Backward" + forwardBackwardTilt);
             //move something using forwardbackwardtilt as speed (car/tank)
+            if(ctrlType == ControlType.Gears)
+            {
+                tankScr.engagedTracks = -1;
+            }
+            else if(ctrlType == ControlType.Throttle)
+            {
+                tankScr.MoveTank(-forwardBackwardTilt / 2);
+            }
+                
         }
         else if(forwardBackwardTilt > 5 && forwardBackwardTilt<74)
         {
             Debug.Log("Forward" + forwardBackwardTilt);
             //move something using forwardbackwardtilt as speed (car/tank)
-
+            if (ctrlType == ControlType.Gears)
+            {
+                tankScr.engagedTracks = 1;
+            }
+            else if (ctrlType == ControlType.Throttle)
+            {
+                tankScr.MoveTank(forwardBackwardTilt);
+            }
+        }
+        else
+        {
+            if (ctrlType == ControlType.Gears)
+            {
+                tankScr.engagedTracks = 0;
+            }
+            else if (ctrlType == ControlType.Throttle)
+            {
+                tankScr.MoveTank(0);
+            }
         }
 
         sideToSideTilt = topOfJoystick.rotation.eulerAngles.z;
