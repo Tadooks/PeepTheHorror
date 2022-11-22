@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class JoystickControl : MonoBehaviour
 {
+    public AudioSource audio;
     public Transform topOfJoystick;
 
     public TankController tankScr;
@@ -50,6 +51,7 @@ public class JoystickControl : MonoBehaviour
         else if(forwardBackwardTilt > 5 && forwardBackwardTilt<74)
         {
             Debug.Log("Forward" + forwardBackwardTilt);
+            
             //move something using forwardbackwardtilt as speed (car/tank)
             if (ctrlType == ControlType.Gears)
             {
@@ -58,6 +60,7 @@ public class JoystickControl : MonoBehaviour
             else if (ctrlType == ControlType.Throttle)
             {
                 tankScr.MoveTank(forwardBackwardTilt);
+                audio.Play();
             }
         }
         else
