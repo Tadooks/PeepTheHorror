@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tank
   - EventTriggerTag
+  - Battery
   layers:
   - Default
   - TransparentFX
