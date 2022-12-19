@@ -8,16 +8,19 @@ public class TankController : MonoBehaviour
     Rigidbody rig;
 
     public float speed;
+    private float oldSpeed;
     public int engagedTracks = 0; // -1 - Left, 0 - Both, 1 - Right
     public List<GameObject> BatteryIndicators;
     public int batteryCharge;
     public Material batteryOff;
     public Material batteryOn;
+    public bool Deathlined = false;
     // Start is called before the first frame update
     void Start()
     {
         rig = GetComponent<Rigidbody>();
         RenderBattery();
+        oldSpeed = speed;
     }
 
     // Update is called once per frame
@@ -58,5 +61,15 @@ public class TankController : MonoBehaviour
                 BatteryIndicators[i].GetComponent<MeshRenderer>().material = batteryOff;
             }
         }
+    }
+
+    public void DisengageControls()
+    {
+        speed = 0;
+    }
+
+    public void EngageControls()
+    {
+        speed = oldSpeed;
     }
 }
