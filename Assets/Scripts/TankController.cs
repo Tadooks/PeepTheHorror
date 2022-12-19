@@ -15,6 +15,7 @@ public class TankController : MonoBehaviour
     public Material batteryOff;
     public Material batteryOn;
     public bool Deathlined = false;
+    public Light intLight;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +33,7 @@ public class TankController : MonoBehaviour
 
     public void MoveTank(float thrust)
     {
+        if(speed > 0)
         switch (engagedTracks)
         {
             case 0:
@@ -66,10 +68,28 @@ public class TankController : MonoBehaviour
     public void DisengageControls()
     {
         speed = 0;
+        intLight.intensity = 0.75f;
+    }
+    IEnumerator Control()
+    {
+
+        for (int i = 0; i < 2; i++)
+        {
+            Debug.LogWarning("Time started)");
+            yield return new WaitForSeconds(3);
+            Debug.LogWarning("Time passed");
+            speed = oldSpeed;
+            intLight.intensity = 2.28f;
+        }
     }
 
     public void EngageControls()
     {
-        speed = oldSpeed;
+        if (speed <= 0)
+        {
+            StartCoroutine(Control());
+        }
     }
+
+ 
 }

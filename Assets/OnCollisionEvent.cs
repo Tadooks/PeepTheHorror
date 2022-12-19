@@ -43,6 +43,20 @@ public class OnCollisionEvent : MonoBehaviour
                     dLine.SetActive(true);
                 }
                 break;
+
+            case "Battery 3":
+                TankScr.batteryCharge++;
+                TankScr.RenderBattery();
+                Destroy(other.gameObject);
+                if(TankScr.Deathlined)
+                {
+                    //Ded
+                }
+                else
+                {
+                    //You're winner
+                }
+                break;
             case "Creatura": //Touched passive creatura
                 //Spooky dookie sound 
                 other.gameObject.SetActive(false);

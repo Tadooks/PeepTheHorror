@@ -11,6 +11,8 @@ TagManager:
   - Creatura
   - CreaturaSpook
   - Deathline
+  - Battery 2
+  - Battery 3
   layers:
   - Default
   - TransparentFX

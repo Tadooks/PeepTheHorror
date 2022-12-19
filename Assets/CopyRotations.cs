@@ -18,6 +18,7 @@ public class CopyRotations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(carRotat)
         CopyRotation(target,carRotat);
     }
 }
