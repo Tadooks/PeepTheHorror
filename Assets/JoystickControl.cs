@@ -60,7 +60,7 @@ public class JoystickControl : MonoBehaviour
             else if (ctrlType == ControlType.Throttle)
             {
                 tankScr.MoveTank(forwardBackwardTilt);
-                audio.Play();
+                //audio pitch here maybie
             }
         }
         else
